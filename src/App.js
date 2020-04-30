@@ -60,11 +60,13 @@ class App extends React.Component {
               Поиск
             </Search>
           </div>
-          <Table
-            list={result.hits}
-            pattern={searchTerm}
-            onDismiss={this.onDismiss}
-          />
+          { result &&
+            <Table
+              list={result.hits}
+              pattern={searchTerm}
+              onDismiss={this.onDismiss}
+            />
+          }
         </div>
       );
     }
