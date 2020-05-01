@@ -21,7 +21,9 @@ class App extends React.Component {
     };
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
   }
   setSearchTopStories(result) {
     this.setState({ result });
@@ -35,18 +37,28 @@ class App extends React.Component {
     });
   }
 
-    componentDidMount() {
+  componentDidMount() {
       const { searchTerm } = this.state;
-      fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      this.fetchSearchTopStories(searchTerm);
+  }
+
+  onSearchChange(event) {
+      this.setState({ searchTerm: event.target.value });
+  }
+
+  onSearchSubmit() {
+    const { searchTerm } = this.state;
+    this.fetchSearchTopStories(searchTerm);
+  }
+
+  fetchSearchTopStories(searchTerm) {
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => error);
   }
 
-    onSearchChange(event) {
-      this.setState({ searchTerm: event.target.value });
-    }
-    render() {
+  render() {
       const { searchTerm, result } = this.state;
 
       if (!result) { return null; }
@@ -56,6 +68,7 @@ class App extends React.Component {
             <Search
               value={searchTerm}
               onChange={this.onSearchChange}
+              onSubmit = {this.onSearchChange}
             >
               Поиск
             </Search>
