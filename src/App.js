@@ -206,6 +206,4 @@ const Button = ({onClick, className = '', children}) =>
     {children}
   </button>
 
-// do smth
-
 export default App;
