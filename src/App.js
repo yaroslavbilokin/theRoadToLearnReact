@@ -216,4 +216,8 @@ const Button = ({onClick, className = '', children}) =>
 
 export default App;
 
-// laziest commit
+export {
+  Button,
+  Search,
+  Table,
+};
