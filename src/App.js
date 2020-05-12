@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import './App.css';
 
 const DEFAULT_QUERY = 'redux';
@@ -205,7 +206,12 @@ const Table = ({ list, onDismiss }) =>
     )}
   </div>
 
-const Button = ({onClick, className = '', children}) =>
+Table.propTypes = {
+  list: PropTypes.array.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
+
+const Button = ({onClick, className, children}) =>
   <button
     onClick={onClick}
     className={className}
@@ -213,6 +219,15 @@ const Button = ({onClick, className = '', children}) =>
     >
     {children}
   </button>
+  Button.defaultProps = {
+    className: '',
+  };
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 export default App;
 
