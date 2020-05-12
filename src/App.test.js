@@ -59,6 +59,14 @@ describe('Button', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('correct button', () => {
+    const element = shallow(
+      <Button>Дай мне больше</Button>
+    );
+
+    expect(element);
+  })
+
 });
 
 describe('Table', () => {
